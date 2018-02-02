@@ -1,0 +1,84 @@
+using System;
+
+using System.IO;
+
+
+namespace AdisNamespace
+{
+    class FileHandling1
+    {
+        private FileStream fs = null;
+        private StreamWriter sw = null;
+        private StreamReader sr = null;
+        int ID;
+        string Name;
+        public void Getdata()
+        {
+            Console.WriteLine("Enter ID,Name:\n");
+            ID = int.Parse(Console.ReadLine());
+            Name = Console.ReadLine();
+        }
+        public void WriteToConsole()
+        {
+            Console.WriteLine("\nID:\t{0}\nName:\t{1}", ID, Name);
+        }
+        public void WriteToFile()
+        {
+            try
+            {
+                fs = new FileStream(@"E:\MyFile.txt", FileMode.Append, FileAccess.Write);
+                sw = new StreamWriter(fs);
+                sw.WriteLine("ID:\t" + ID);
+                sw.WriteLine("Name:\t" + Name);
+                sw.Flush();
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine(E.Message);
+            }
+            finally
+            {
+                if(sw!=null)
+                    sw.Close();
+                if (fs != null)
+                    fs.Close();
+            }
+        }
+        public void ReadFromFile()
+        {
+
+            try
+            {
+                fs = new FileStream(@"E:\MyFile.txt", FileMode.Open, FileAccess.Read);
+                sr = new StreamReader(fs);
+                sr.BaseStream.Seek(10, SeekOrigin.Begin);
+                string str = sr.ReadToEnd();
+                if (str != null)
+                    Console.WriteLine(str);
+            }
+            catch (Exception E)
+            {
+                Console.WriteLine(E.Message);
+            }
+            finally
+            {
+                if (sr != null)
+                    sr.Close();
+                if (fs != null)
+                    fs.Close();
+            }
+        }
+        static void Main(string[] args)
+        {
+            FileHandling1 f1 = new FileHandling1();
+            f1.Getdata();
+            f1.WriteToConsole();
+            Console.WriteLine("WRITING AND READING FROM FILE\n\n ");
+            f1.WriteToFile();
+            f1.ReadFromFile();
+            Console.ReadKey(false);
+
+        }
+
+    }
+}
