@@ -10,8 +10,8 @@ namespace AdisNamespace
         private FileStream fs = null;
         private StreamWriter sw = null;
         private StreamReader sr = null;
-        int ID;
-        string Name;
+        public int ID { get; set; }
+        public string Name { get; set; }
         public void Getdata()
         {
             Console.WriteLine("Enter ID,Name:\n");
