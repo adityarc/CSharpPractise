@@ -1,0 +1,1 @@
+This folder is basically holding samples of a windows application form and the actions performed in ADO.net
