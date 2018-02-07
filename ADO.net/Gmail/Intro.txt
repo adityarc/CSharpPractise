@@ -1,0 +1,1 @@
+This folder contains details about creating a windows form to perform Gmail, sign up, sign in and updation of details
